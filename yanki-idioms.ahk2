@@ -1,0 +1,158 @@
+﻿#Requires AutoHotkey v2.0
+#SingleInstance Force
+
+/*
+1. 分號(;)開頭表示是註解行。
+2. 斜線(/)開頭表示輸出資料夾
+3. 井號(#)開頭指定標籤，標籤不帶#符號
+  如: #標籤1 標籤2 標籤3
+4. 成語 解釋
+*/
+
+Global _sOutputFormat__ := 1
+
+Global sInputFile := "j:\AHK2\idioms.tsv"  ; 輸入的設定檔, 檔案編碼：UTF-8
+Global sSeparator := A_Tab  ; 輸入檔的分隔字元
+
+Global sOutputFormat_
+
+; 要產生的模板
+; {1}=成語 {2}=解釋 {3}=標籤
+sOutputFormat_ := "
+(
+---
+tags:
+{3}
+---
+[anki:tts lang=zh_TW]{1}[/anki:tts]
+<div class="yin">{1}</div>
+
+---
+
+{2}
+
+)"  ; sOutputFormat_
+
+;f1::
+oInputBox := InputBox("輸入設定檔名：", "輸入檔名", "w300 h100", sInputFile)
+if (oInputBox.Result = "Cancel") {
+  Return
+}
+sInputFile := oInputBox.Value
+
+if !FileExist(sInputFile) {
+  MsgBox(sInputFile . "必須先建立。", "Error!", 0)
+  Return
+}
+_iCount := 0
+
+FileEncoding "UTF-8"
+
+global sOutputFolder_ := ""
+global sTags_ := ""
+
+_sTags := ""
+
+_aIdiomWords := []
+_aTags := []
+_iWordCount := 0
+_iOutputCount := 0
+
+; 為了顯示進度條，將要處理的單字加入陣列，並找出單字數目
+Loop read, sInputFile
+{
+  iLineNumber := A_Index
+  Loop parse, A_LoopReadLine, "`n"
+  {
+    _sLine := A_LoopField
+    _sFirstChar := SubStr(_sLine, 1, 1)
+    if (_sFirstChar == ";") {  ;; 第一個字元分號是註解行
+      continue
+    }
+    if (_sFirstChar == "/") {  ;; 第一個字元 / 指定輸出資料夾
+      sOutputFolder_ := SubStr(_sLine, 2, 255)
+      _sLastChar := SubStr(sOutputFolder_, StrLen(sOutputFolder_), 1)
+      ;MsgBox "lastchar=" . _sLastChar . "$"
+      if (_sLastChar != "\") {
+        sOutputFolder_ := sOutputFolder_ . "\"
+      }
+      ;MsgBox "folder=" . sOutputFolder_
+      if (!FileExist(sOutputFolder_)) {
+        DirCreate(sOutputFolder_)
+      }
+      _iOutputCount++
+      continue
+    } else if (_sFirstChar == "#") {  ;; #標籤1 標籤2
+      _sTags := SubStr(_sLine, 2, 255)
+      _aTags := StrSplit(_sTags, A_Space, "#")  ; Omits #
+      for i, _sTag in _aTags {
+        sTags_ := sTags_ . "  - " . _sTag . "`r`n"
+      }
+      continue
+    }
+    _iWordCount++
+    _aIdiomWords.Push(_sLine)
+  }
+}  
+if (_iOutputCount == 0) {
+  MsgBox("未指定存檔資料夾，請先指定。`n如：/j:\JERRY\Anki\060-Anki\成語典\", "Error!", 0)
+  Return
+}
+if (sTags_ == "") {
+  sTags_ := "  - 成語"
+} else {
+  sTags_ := SubStr(sTags_, 1, StrLen(sTags_)-2)  ; remove the last newline
+}
+msgbox "tags=" . sTags_
+_fProgressInc := Float(100 / _iWordCount)  ; 進度條每次要增加的數字
+MyGui := Gui()
+oText := MyGui.Add("Text", "w200", "產生總數: " . "0 / " . _iWordCount)
+MyGui.Add("Progress", "w200 h20 cBlue vMyProgress", 0)
+MyGui.Show()
+
+_iCount := 0
+Loop _iWordCount
+{
+  _sLine := _aIdiomWords[A_Index]
+  _iPos := InStr(_sLine, "`t")   ; 以 Tab 分隔
+  if (_iPos <= 0) {
+    continue
+  }
+  _sIdiomWord := SubStr(_sLine, 1, _iPos-1)
+  _sExplain := SubStr(_sLine, _iPos+1, 128)
+  _iCount++
+  
+  oText.Value := "產生總數: " . _iCount . " / " . _iWordCount
+  MyGui["MyProgress"].Value := _iCount * _fProgressInc
+  output(_sIdiomWord, _sExplain)
+}
+MyGui.Destroy
+
+MsgBox("處理數: " . _iCount, "Result", 0)
+ExitApp(0)
+Return
+
+;; 輸出
+output(sIdiomWord, sExplain) {
+  ;MsgBox("Text " . sIdiomWord . "=" . sExplain, "Title", 0)
+  local _sOutput, _sOutputFolder
+
+  _sFirstWord := SubStr(sIdiomWord, 1, 1)
+  try {
+    _sOutputFolder := sOutputFolder_ . _sFirstWord . "\"  ; 一葉知秋 放在 "一"資料夾
+    if (!FileExist(_sOutputFolder)) {
+      DirCreate(_sOutputFolder)
+    }
+    _sOutputFilename := sIdiomWord . ".md"
+    if (FileExist(_sOutputFolder . _sOutputFilename)) {
+      FileDelete(_sOutputFolder . _sOutputFilename)
+    }
+    _sOutput := Format(sOutputFormat_, sIdiomWord, sExplain, sTags_)
+    FileAppend(_sOutput, _sOutputFolder . _sOutputFilename, "`n UTF-8")  ; translate `n to `r`n
+    return 1
+  } catch (Error as err) {
+    MsgBox(sIdiomWord . " " . err.Message, "Error!", 0)
+    return 0
+  }
+}
+

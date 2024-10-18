@@ -1,0 +1,139 @@
+#Requires AutoHotkey v2.0
+#SingleInstance Force
+
+/**
+ * @version: 2024-02-25 12:13:14
+ * @author: Jerry
+ * @Purpose: AutoHotkey v2 script
+*/
+
+:?*:,atg::
+(
+autohotkey tutorial,autohotkey,autohotkey scripts,autohotkey script
+autohotkey,keyboard,mouse,produtivity,windows,autohotkey tutorial,autohotkey script,
+how to use autohotkey,AutoHotkey 教學,AutoHotkey 教学,AutoHotkey 教程,鍵盤工具,
+AutoGUI,autogui ahk,AdventureIDE,ahk,ahk tutorial,ahk2
+)
+
+:?*:,otg:: 
+(
+obsidian,markdown,obsidian app,obsidian zettelkasten,zettelkasten,zettelkasten method,
+note taking tips,note taking,卡片盒筆記法,筆記軟體,markdown note taking,Obsidian Plugins,
+obsidian note taking,obsidian notes,obsidian 教程,obsidian 教学,obsidian 教學,
+zettelkasten obsidian,obsidian tutorial,obsidian for beginners,obsidian for programmers,
+옵시디언,オブシディアン,obsidian 外掛,obsidian 插件,notion alternatives
+)
+
+::,ifrm::{
+  text := '
+(  
+<iframe width="650" height="315" src="https://www.youtube.com/embed/$$" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>
+)'
+  SendInput text  "{up}{right 59}"
+}
+
+::,tts:: {
+  Send "[anki:tts lang=zh_TW][/anki:tts]{left 11}"
+}
+
+:O:,tb1:: {
+  text := "| 字形 | 字音 | 解釋 | 舉例或詞語 |`n| :--  | :--- | :--- | :--------- |`n"
+  send text
+  sleep 15
+}
+
+;; ㄅ ㄆ ㄇ ㄈ ㄉ ㄊ ㄋ ㄌ ㄍ ㄎ ㄏ ㄐ ㄑ ㄒ
+;; ㄓ ㄔ ㄕ ㄖ ㄗ ㄘ ㄙ ㄚ ㄛ ㄜ ㄝ ㄞ ㄟ ㄠ
+;; ㄡ ㄢ ㄣ ㄤ ㄥ ㄦ  ㄧ ㄨ ㄩ
+:O:,b::ㄅ
+:O:,p::ㄆ
+:O:,m::ㄇ
+:O:,f::ㄈ
+:O:,d::ㄉ
+:O:,t::ㄊ
+:O:,n::ㄋ
+:O:,l::ㄌ
+:O:,g::ㄍ
+:O:,k::ㄎ
+:O:,h::ㄏ
+:O:,j::ㄐ
+:O:,q::ㄑ
+:O:,x::ㄒ
+:O:,zh::ㄓ
+:O:,ch::ㄔ
+:O:,sh::ㄕ
+:O:,r::ㄖ
+:O:,z::ㄗ
+:O:,c::ㄘ
+:O:,s::ㄙ
+:O:,a::ㄚ
+:O:,o::ㄛ
+:O:,e::ㄜ
+:O:,ye::ㄝ
+:O:,ai::ㄞ
+:O:,ei::ㄟ
+:O:,a::ㄠ
+:O:,u::ㄡ
+:O:,an::ㄢ
+:O:,en::ㄣ
+:O:,ang::ㄤ
+:O:,ng::ㄥ
+:O:,er::ㄦ
+:O:,yi::ㄧ
+:O:,i::ㄧ
+:O:,w::ㄨ
+:O:,u::ㄩ
+:O:,yu::ㄩ
+:O:,2::ˊ
+:O:,3::ˇ
+:O:,4::ˋ
+
+:O:,rb::{
+  send "<ruby><rt></rt></ruby>{left 16}"
+}  
+
+:O:,yin::{
+  send "<span class='yin'></span>{left 7}"
+}  
+
+:O:,pdic::https://crptransfer.moe.gov.tw/index.jsp
+
+;;===== Keyboard =====
+!up:: Send "{Volume_Up}" ;shift + numpad plus
+!down:: Send "{Volume_Down}" ;shift + numpad minus
+!right:: Send "{Volume_Mute}" ; Break key mutes
+
+
+!left:: {
+  targetWindowTitle := "ahk_exe mpv.exe"  ; 將目標窗口標題設定為“未命名 - 記事本”
+  targetKey := "{RButton}"  ; 要發送的按鍵. 右鍵可讓mpv暫停播放
+
+  ; 檢查目標窗口是否存在
+  hwnd := WinExist(targetWindowTitle)
+  if (hwnd) {
+    WinActivate(targetWindowTitle)
+    ;;sleep 60
+    ;WinGetPos &X, &Y, &W, &H, hwnd
+    ;X := X - W
+    ;Y := Y - H
+    X := A_ScreenWidth - (A_ScreenWidth / 2)
+    Y := A_ScreenHeight - (A_ScreenHeight / 2)
+    MouseMove X, Y
+    Send targetKey
+    sleep 30
+    WinMinimize
+    ;;ControlClick [Control-or-Pos, WinTitle, WinText, WhichButton, ClickCount, Options, ExcludeTitle, ExcludeText]
+    ;;ControlClick(, hwnd, , "Right", 1, "d x150 y150")
+  } else {
+    MsgBox("目標視窗（" targetWindowTitle "）未找到。")
+  }
+}  
+
+;;$f9::Send "{f9}{enter}"
+
+;; ===== HotString =====
+:O:,uq::25117554
+:O:,gu::54703127
+:O:,sd::Stable Diffusion
+

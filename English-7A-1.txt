@@ -1,0 +1,44 @@
+; ==========
+; 單字
+; 第1課
+/j:\JERRY\MOC\060-Anki\7A\英文\7A-1\7A-1-單字
+show
+picture
+goose
+geese
+point
+lion
+monkey
+more
+winner
+Bigfoot
+bee
+frog
+zebra
+birthday
+elephant
+mouse
+mice
+ant
+sheep
+goat
+angry
+young
+clean
+dirty
+hippo
+strong
+brown
+but
+bear
+fruit
+favorite
+hairy
+forest
+footprint
+tiger
+smart
+cookie
+Yeti
+mountain
+meat

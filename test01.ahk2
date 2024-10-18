@@ -1,0 +1,17 @@
+﻿#Requires AutoHotkey v2.0
+
+MsgBox "Hello!","Message title",64  ; 64=Information icon
+
+;; 函數式語法. options "Icon? YN Default2"=32+4+256
+sResult := MsgBox("Hello!","Message title","Icon? YN Default2")
+MsgBox("You pressed: " . sResult)
+
+;; 字串連接
+sToday := A_YYYY . "年" . A_MM . "月" . A_DD "日"
+MsgBox("今天是 " sToday "`n時間：" A_Hour "時" A_Min "分" A_Sec "秒")
+
+sResult := MsgBox("Hello", "title", 256)
+MsgBox("result=" . sResult)
+
+sResult := MsgBox('This is text', 'This is title', 'YN Icon?')
+OutputDebug(sResult)

@@ -1,0 +1,31 @@
+A_YYYY . "年" . A_MM . "月" . A_DD "日" 
+
+mymail@gmail.com 
+mymail@gmail.com 
+mymail@gmail.com 
+,mymail@gmail.com 
+,mymail@gmail.com 
+
+mymail@gmail.com 
+,mymail@gmail.com 
+,mymail@gmail.com
+/mymail@gmail.com 
+mymail@gmail.com 
+
+,mymail@gmail.com 
+,mymail@gmail.com
+
+MsgBox "多行字串範例
+" . Format(sFormat, A_YYYY, A_MM, A_DD, A_Hour, A_Min, A_Sec) 
+
+2024年03月11日 15時24分20秒
+
+2024年03月11日 15時24分34秒
+台灣
+
+mymail@gmail.com 
+mymail@gmail.com
+<iframe width="650" height="315" src="https://www.youtube.com/embed/$$" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>
+<iframe width="650" height="315" src="https://www.youtube.com/embed/$$" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>

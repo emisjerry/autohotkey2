@@ -1,0 +1,46 @@
+#Requires AutoHotkey v2.0
+#SingleInstance Force
+
+/**
+ * @version: 2024-03-11 10:09:00
+ * @author: Jerry
+ * @Purpose: AutoHotkey v2 script
+*/
+
+sCurrentDate := A_YYYY  A_MM  A_DD " " A_Hour ":" A_Min ":" A_Sec
+FileAppend "Date=" . sCurrentDate . "`n", "C:\Certbot\update.log"
+sFile := "C:/Certbot/archive/emis.com.tw/cert.pem"
+sAttrib := FileExist(sFile)
+if (sAttrib == "") {
+  FileAppend "*** Local has no cert.pem`n`n", "C:\Certbot\update.log"
+  Exit 0
+}
+sNewFile := "X:/cert.pem"
+sAttrib := FileExist(sFile)
+if (sAttrib == "") {
+  FileAppend "*** Remote has no cert.pem`n`n", "C:\Certbot\update.log"
+  Exit 0
+}
+
+;;  YYYYMMDDHH24MISS format
+sMyTimestamp := FileGetTime(sFile, "M")
+sNewTimestamp := FileGetTime(sNewFile, "M")
+
+iUpdated := 0
+if (StrCompare(sNewTimestamp, sMyTimestamp) > 0) {
+  ;;FileCopy "X:\cert.pem", "C:\Certbot\archive\emis.com.tw\", 1
+  try {
+    FileCopy "X:\*.pem", "C:\Certbot\archive\emis.com.tw\", true
+    isUpdated := 1
+  } catch as Err {
+    sErrorMsg := Err.Message
+    FileAppend "*** copied failed " . sErrorMsg . "`n", "C:\Certbot\update.log"
+  }
+
+  FileAppend "Copied *.pem`n", "C:\Certbot\update.log"
+} else {
+  FileAppend "No copy.`n", "C:\Certbot\update.log"
+}
+sCurrentDate := A_YYYY  A_MM  A_DD " " A_Hour ":" A_Min ":" A_Sec
+FileAppend Format("! Done " . sCurrentDate . "`n`n"), "C:\Certbot\update.log"
+Exit iUpdated

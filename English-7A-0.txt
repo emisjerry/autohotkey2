@@ -1,0 +1,55 @@
+; ==========
+; 片語以Tab分隔
+;post office	郵局 中aaaa
+; ==========
+; 克漏字必須有{{c1::xxx}}
+;I love {{c1::summer}} {{c2::vacation}}. / 我喜歡暑假
+; 單字
+; 第1課
+/j:\JERRY\MOC\060-Anki\7A\英文\7A-0\7A-0-words
+Good morning.
+Good afternoon.
+Good evening.
+Good night.
+Nice to see you.
+welcome
+one
+two
+three
+four
+five
+six
+seven
+eight
+nine
+ten
+eleven
+twelve
+twenty
+thirty
+forty
+fifty
+blue
+red
+yellow
+white
+orange
+black
+apple
+egg
+food
+doctor
+nurse
+teacher
+student
+class
+desk
+game
+name
+sister
+brother
+time
+long
+happy
+ready
+right

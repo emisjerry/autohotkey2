@@ -1,0 +1,29 @@
+{{Front}}
+<br>
+
+{{#Extra}}
+<div id="EXTRA">
+{{tts en_US voices=AwesomeTTS:Extra}}
+</div>
+{{/Extra}}
+
+{{^Extra}}
+<div id="FRONT">
+{{tts en_US voices=AwesomeTTS:Front}}
+</div>
+{{/Extra}}
+
+<script>
+  var sDeck = "{{Deck}}";
+  
+  if (sDeck.indexOf("Chinese") >= 0) {
+    elem = document.getElementById("FRONT");
+    if (elem) {
+      elem.style.display = "none";
+    }
+    elem = document.getElementById("EXTRA");
+    if (elem) {
+      elem.style.display = "none";
+    }
+  }
+</script>

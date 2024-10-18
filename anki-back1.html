@@ -1,0 +1,21 @@
+{{FrontSide}}
+
+<hr id=answer>
+
+{{Back}}
+
+{{#Extra}}
+<div id="EXTRA_TTS">
+  {{tts zh_TW voices=AwesomeTTS:Extra}}
+</div>
+{{/Extra}}
+
+<script>
+  var sDeck = "{{Deck}}";
+  var ele = document.getElementsByTagName("tts");
+  if (ele) {
+    if (sDeck.startsWith("English")) {
+      ele.remove();
+    }
+  }
+</script>
