@@ -1,0 +1,24 @@
+#Requires AutoHotkey v2.0
+#SingleInstance Force
+
+sDayDiff := A_Args[1]
+iDayDiff := Integer(sDayDiff)
+
+sFormat := A_Args[2]
+
+sDateAfterDiff := DateAdd(A_Now, iDayDiff, "days")
+sDate := ""
+if (sFormat == "C") {
+  sDate := FormatTime(sDateAfterDiff, "yyyy年MM月dd日")
+} else if (sFormat == "R") {
+  sYear := FormatTime(sDateAfterDiff, "yyyy")
+  sYear := String(Integer(sYear) - 1911)
+  sDate := sYear . "年" . FormatTime(sDateAfterDiff, "MM月dd日")
+} else if (sFormat == "E") {
+  sDate := FormatTime(sDateAfterDiff, "yyyy/MM/dd")
+}
+
+;A_Clipboard := sDate
+
+FileAppend sDate , "*", "UTF-8"
+

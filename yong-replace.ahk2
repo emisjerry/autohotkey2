@@ -1,0 +1,28 @@
+﻿#Requires AutoHotkey v2.0
+#SingleInstance Force
+/**
+ * @version: 2024-10-23 09:06:37
+ * @author: Jerry
+ * @Purpose: AutoHotkey v2 script. Called by Yong IME.
+ * @example: 
+ * zrpf $[替換成全形標點]$GO(|c:\util\AHK\autohotkey64.exe$_j:\ahk2\yong-replace.ahk2$_$CLIPBOARD$_F)$SPACE
+ * zrph $[替換成半形標點]$GO(|c:\util\AHK\autohotkey64.exe$_j:\ahk2\yong-replace.ahk2$_$CLIPBOARD$_H)$SPACE
+*/
+sMsg := A_Args[1]
+sFormat := A_Args[2]
+;MsgBox sMsg . "," . sFormat
+aHalfShapes := [ ",", ".", ":", "?" ]
+aFullShapes := [ "，", "。", "：", "？" ]
+if (sFormat == "H") {  ; to Half shape
+  aFromShapes := aFullShapes
+  aToShapes := aHalfShapes
+} else {  ; to Full shape
+  aFromShapes := aHalfShapes
+  aToShapes := aFullShapes
+}
+
+for sFromItem in aFromShapes {
+  sToItem := aToShapes[A_Index]
+  sMsg := StrReplace(sMsg, sFromItem, sToItem)
+}
+FileAppend sMsg, "*", "UTF-8"

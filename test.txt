@@ -1,31 +1,11 @@
-A_YYYY . "年" . A_MM . "月" . A_DD "日" 
+ㄅ ㄆ ㄇ ㄈ
 
-mymail@gmail.com 
-mymail@gmail.com 
-mymail@gmail.com 
-,mymail@gmail.com 
-,mymail@gmail.com 
+A_Args。Length，aaa。bbb
+znoa ① ② ③ ④ ⑤ ⑥ ⑦ ⑧ ⑨ ⑩ ⓪ ⑪ ⑫ ⑬ ⑭ ⑮ ⑯ ⑰ ⑱ ⑲ ⑳ ㉑ ㉒ ㉓ ㉔ ㉕ ㉖ ㉗ ㉘ ㉙ ㉚ ㉛ ㉜ ㉝ ㉞ ㉟ ㊱ ㊲ ㊳ ㊴ ㊵ ㊶ ㊷ ㊸ ㊹ ㊺ ㊻ ㊼ ㊽ ㊾ ㊿ ⓪
 
-mymail@gmail.com 
-,mymail@gmail.com 
-,mymail@gmail.com
-/mymail@gmail.com 
-mymail@gmail.com 
-
-,mymail@gmail.com 
-,mymail@gmail.com
-
-MsgBox "多行字串範例
-" . Format(sFormat, A_YYYY, A_MM, A_DD, A_Hour, A_Min, A_Sec) 
-
-2024年03月11日 15時24分20秒
-
-2024年03月11日 15時24分34秒
-台灣
-
-mymail@gmail.com 
-mymail@gmail.com
-<iframe width="650" height="315" src="https://www.youtube.com/embed/$$" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-</iframe>
-<iframe width="650" height="315" src="https://www.youtube.com/embed/$$" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-</iframe>
+2024-10-24 2024?10?25? 
+2024?10?24? 2024?10?24?
+中文測試,abc.
+ÖÐÎÄœyÔ‡£¬abc¡£
+ÖÐÎÄœyÔ‡£¬abc¡£
+2024年10月25日

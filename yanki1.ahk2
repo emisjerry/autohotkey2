@@ -130,7 +130,7 @@ Return
 ;; 寫出單字 sNotion: 詞性
 output(iActionKind, sOutputFolder, sEnglish, sChinese, sOutputSubFolder) {
   ;MsgBox("Text " . sEnglish . "=" . sChinese, "Title", 0)
-  local _sOutput, _aTokens, _sChineseGet, _sNotion
+  local _sOutput, _aTokens,_sNotion
 
   if (iActionKind == _ACTION_WORD_) {  ; 單字
     action := action_word
